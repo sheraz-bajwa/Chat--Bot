@@ -15,15 +15,12 @@ class _ChatBotState extends State<ChatBot> {
   TextEditingController _countryController = TextEditingController();
 
   final List<ChatMessages> messages = [];
-  //late OpenAI chatGpt;
-  StreamSubscription? subscription;
-  // final apiKey = "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";
-
+//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
   var openAI = OpenAI.instance.build(
-      token: "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",
+      //token: '',enter you api key
+      orgId: "",
       baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 300)),
       enableLog: true);
-  //OpenAI? openAI;
 
   @override
   void initState() {
@@ -32,30 +29,35 @@ class _ChatBotState extends State<ChatBot> {
     openAI = OpenAI.instance;
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    subscription?.cancel();
-  }
-
-//new
-// api key= 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
   Future<void> _sendMessage() async {
-    ChatMessages newMessage =
-        ChatMessages(text: _countryController.text, sender: 'User');
+    ChatMessages newMessage = ChatMessages(
+      text: _countryController.text,
+      sender: 'User',
+      img: 'assets/man.png',
+    );
 
     setState(() {
       messages.insert(0,
           newMessage); // Insert at the beginning of the list to show new messages at the bottom.
     });
 
-    _countryController.clear();
     final request = CompleteText(
         prompt: newMessage.text, model: TextDavinci3Model(), maxTokens: 200);
 
     final response = await openAI.onCompletion(request: request);
-    print(response!.choices[0].text);
+    ChatMessages BotMessage = ChatMessages(
+      text: response!.choices[0].text,
+      sender: 'Bot',
+      img: 'assets/robot.png',
+    );
+
+    setState(() {
+      messages.insert(0,
+          BotMessage); // Insert at the beginning of the list to show new messages at the bottom.
+    });
+    _countryController.clear();
+
+    // print(response!.choices[0].text);
   }
 
   Widget _textcomposer() {
@@ -82,7 +84,7 @@ class _ChatBotState extends State<ChatBot> {
         ),
         IconButton(
           onPressed: () {
-            _sendMessage();
+            //  _sendMessage();
           },
           icon: Icon(Icons.send),
           //color: Colors.amber,
@@ -94,6 +96,7 @@ class _ChatBotState extends State<ChatBot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text('ChatBOt'),

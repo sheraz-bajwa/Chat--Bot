@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ChatMessages extends StatelessWidget {
-  const ChatMessages({super.key, required this.text, required this.sender});
+  const ChatMessages(
+      {super.key, required this.text, required this.sender, required this.img});
 
   final String text;
   final String sender;
+  final String img;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -12,30 +14,45 @@ class ChatMessages extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(right: 20),
           child: CircleAvatar(
-            backgroundColor: Colors.blue,
-            child: Center(
-              child: Text(
-                'U',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
+              backgroundColor: Colors.blue,
+              child: Image.asset(
+                img,
+                fit: BoxFit.cover,
+              )),
         ),
         Expanded(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              sender,
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
+            ListTile(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  color: Colors.purple,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              title: Text(
+                sender,
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              subtitle: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 200,
+                    child: Text(
+                      text,
+                      softWrap: true,
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            Text(
-              text,
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
-            )
           ],
         ))
       ],
