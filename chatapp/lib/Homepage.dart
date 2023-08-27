@@ -15,9 +15,9 @@ class _ChatBotState extends State<ChatBot> {
   TextEditingController _countryController = TextEditingController();
 
   final List<ChatMessages> messages = [];
-//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
+
   var openAI = OpenAI.instance.build(
-      //token: '',enter you api key
+      token: '',
       orgId: "",
       baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 300)),
       enableLog: true);
