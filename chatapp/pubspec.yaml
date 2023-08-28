@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   chat_gpt_sdk: ^2.2.4
   http: ^1.1.0
+  lottie: ^2.6.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,8 @@ flutter:
   assets:
   - assets/robot.png
   - assets/man.png
+  - assets/green.jpg
+  - assets/bot.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

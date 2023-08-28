@@ -34,6 +34,7 @@ class _ChatBotState extends State<ChatBot> {
       text: _countryController.text,
       sender: 'User',
       img: 'assets/man.png',
+      color: Color.fromARGB(255, 222, 255, 224),
     );
 
     setState(() {
@@ -49,6 +50,7 @@ class _ChatBotState extends State<ChatBot> {
       text: response!.choices[0].text,
       sender: 'Bot',
       img: 'assets/robot.png',
+      color: Color.fromRGBO(224, 243, 250, 0.969),
     );
 
     setState(() {
@@ -76,19 +78,29 @@ class _ChatBotState extends State<ChatBot> {
                 ),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                        width: 1, color: Color.fromARGB(255, 34, 86, 163))),
+                    borderSide: BorderSide(width: 1, color: Colors.green)),
                 hintText: 'Enter Text',
-                hintStyle: TextStyle(color: Colors.black),
+                hintStyle:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
               )),
         ),
-        IconButton(
-          onPressed: () {
-            //  _sendMessage();
-          },
-          icon: Icon(Icons.send),
-          //color: Colors.amber,
-        )
+        Container(
+          margin: EdgeInsets.only(
+            left: 10,
+          ),
+          child: CircleAvatar(
+              backgroundColor: Colors.green,
+              child: IconButton(
+                onPressed: () {
+                  _sendMessage();
+                },
+                icon: Icon(
+                  Icons.send,
+                  color: Colors.white,
+                ),
+                //color: Colors.amber,
+              )),
+        ),
       ],
     );
   }
@@ -96,11 +108,40 @@ class _ChatBotState extends State<ChatBot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      // backgroundColor: Color.fromARGB(255, 30, 30, 30),
       appBar: AppBar(
+        leading: Container(
+          margin: EdgeInsets.only(
+            left: 20,
+          ),
+          child: CircleAvatar(
+              backgroundColor: Colors.blue,
+              child: Image.asset(
+                'assets/robot.png',
+                fit: BoxFit.cover,
+              )),
+        ),
         backgroundColor: Colors.green,
-        title: Text('ChatBOt'),
-        centerTitle: true,
+        title: ListTile(
+          title: Text(
+            'ChatBOt ',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.w900, fontSize: 20),
+          ),
+          subtitle: Row(
+            children: [
+              Text(
+                'online ',
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+              ),
+              CircleAvatar(
+                radius: 3,
+                backgroundColor: const Color.fromARGB(255, 136, 255, 140),
+              ),
+            ],
+          ),
+        ),
       ),
       body: SafeArea(
         child: Column(
