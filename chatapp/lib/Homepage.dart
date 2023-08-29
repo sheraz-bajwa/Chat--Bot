@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:chatapp/Chat.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
-import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 
 class ChatBot extends StatefulWidget {
   const ChatBot({super.key});
@@ -17,9 +16,9 @@ class _ChatBotState extends State<ChatBot> {
   final List<ChatMessages> messages = [];
 
   var openAI = OpenAI.instance.build(
-      token: '',
+      token: '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',
       orgId: "",
-      baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 300)),
+      baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 3000)),
       enableLog: true);
 
   @override
@@ -41,6 +40,7 @@ class _ChatBotState extends State<ChatBot> {
       messages.insert(0,
           newMessage); // Insert at the beginning of the list to show new messages at the bottom.
     });
+    _countryController.clear();
 
     final request = CompleteText(
         prompt: newMessage.text, model: TextDavinci3Model(), maxTokens: 200);
@@ -57,7 +57,6 @@ class _ChatBotState extends State<ChatBot> {
       messages.insert(0,
           BotMessage); // Insert at the beginning of the list to show new messages at the bottom.
     });
-    _countryController.clear();
 
     // print(response!.choices[0].text);
   }
@@ -81,7 +80,7 @@ class _ChatBotState extends State<ChatBot> {
                     borderSide: BorderSide(width: 1, color: Colors.green)),
                 hintText: 'Enter Text',
                 hintStyle:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
               )),
         ),
         Container(
