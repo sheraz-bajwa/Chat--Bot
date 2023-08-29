@@ -16,7 +16,7 @@ class _ChatBotState extends State<ChatBot> {
   final List<ChatMessages> messages = [];
 
   var openAI = OpenAI.instance.build(
-      token: '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',
+      token: '',//your own key
       orgId: "",
       baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 3000)),
       enableLog: true);
